@@ -7,7 +7,7 @@ import { getUrlFromMapping } from "../../utils";
 function Post(props) {
   const post = get(props, "item", null);
   const columnCount = get(props, "columnCount", 1);
-  const postUrl = getUrlFromMapping(get(props, 'data.mappings', []), get(post, "system.codename")) || "#";
+  const postUrl = getUrlFromMapping(get(props, "data.mappings", []), get(post, "system.codename")) || "#";
 
   const theme = useTheme();
   const imageSizes = `(min-width: ${theme.breakpoints.values.md}px) ${Math.floor(100 / columnCount)}vw, 100vw`;

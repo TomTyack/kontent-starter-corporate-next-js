@@ -1,4 +1,4 @@
-import { InputBase } from '@material-ui/core';
+import { InputBase } from "@material-ui/core";
 
 
 function MaterialUISearchBox({
@@ -15,9 +15,9 @@ function MaterialUISearchBox({
         value={currentRefinement}
         onChange={(e) => refine(e.currentTarget.value)}
       />
-      {isSearchStalled ? 'My search is stalled' : ''}
+      {isSearchStalled ? "My search is stalled" : ""}
     </>
   );
 }
 
-export default MaterialUISearchBox
+export default MaterialUISearchBox;

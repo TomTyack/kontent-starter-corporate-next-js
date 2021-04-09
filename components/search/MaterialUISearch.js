@@ -1,7 +1,7 @@
 import { connectSearchBox } from "react-instantsearch-dom";
 import MaterialUISearchBox from "./MaterialUISearchBox";
-import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, Hits, Highlight } from 'react-instantsearch-dom';
+import algoliasearch from "algoliasearch/lite";
+import { InstantSearch, Hits } from "react-instantsearch-dom";
 import { Card, makeStyles } from "@material-ui/core";
 import { getUrlFromMapping } from "../../utils";
 import get from "lodash.get";
@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     marginTop: theme.mixins.toolbar.minHeight,
 
-    '& ul': {
-      listStyle: 'none',
+    "& ul": {
+      listStyle: "none",
       margin: 0,
       padding: 0,
-      'li': {
+      "li": {
         padding: theme.spacing(1)
       }
     }
@@ -29,8 +29,8 @@ function MaterialUISearch(props) {
   const CustomSearchBox = connectSearchBox(MaterialUISearchBox);
 
   const algoliaClient = algoliasearch(
-    'W2NR66RZDB',
-    '47b941f0db8b74634d2d8c59b01f519a',
+    "W2NR66RZDB",
+    "47b941f0db8b74634d2d8c59b01f519a",
   );
 
   const searchClient = {
@@ -60,13 +60,13 @@ function MaterialUISearch(props) {
       <CustomSearchBox />
       <Card className={classes.hits}>
         <Hits hitComponent={({ hit }) => (
-          <a href={getUrlFromMapping(get(props, 'data.mappings', []), hit.codename)}>
+          <a href={getUrlFromMapping(get(props, "data.mappings", []), hit.codename)}>
             {hit.name}
           </a>
         )} />
       </Card>
     </InstantSearch>
-  )
+  );
 }
 
-export default MaterialUISearch
+export default MaterialUISearch;
