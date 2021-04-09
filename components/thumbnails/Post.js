@@ -6,7 +6,7 @@ import { useTheme } from "@material-ui/core";
 function Post(props) {
   let post = get(props, "item", null);
   let columnCount = get(props, "columnCount", 1);
-  let postUrl = "/blog/" + get(post, "slug.value", "#");
+  let postUrl = "blog/" + get(post, "slug.value", "#");
 
   const theme = useTheme();
   const imageSizes = `(min-width: ${theme.breakpoints.values.md}px) ${Math.floor(100 / columnCount)}vw, 100vw`;
