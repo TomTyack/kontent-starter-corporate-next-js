@@ -174,7 +174,7 @@ const Component = sections[componentName];
 if (process.env.NODE_ENV === 'development' && !Component) {
     console.error(`Unknown section component for section content type: ${contentType}`)
     return (
-        <UnknownComponent key={section_idx} {...this.props}>
+        <UnknownComponent key={section_idx} {...props}>
             <pre>{JSON.stringify(section, undefined, 2)}</pre>
         </UnknownComponent>
     );

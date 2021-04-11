@@ -50,7 +50,7 @@ function ListingSection(props) {
                 console.error(`Unknown section component for section content type: ${contentType}`);
                 return (
                   <Grid item md={4} sm={12} key={item_idx}>
-                    <UnknownComponent key={item_idx} {...this.props}>
+                    <UnknownComponent key={item_idx} {...props}>
                       <pre>{JSON.stringify(item, undefined, 2)}</pre>
                     </UnknownComponent>
                   </Grid>
