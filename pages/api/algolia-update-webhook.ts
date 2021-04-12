@@ -26,7 +26,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   //     secret,
   //     signature);
 
-  const webhook: IWebhookDeliveryResponse = JSON.parse(req.body);
+  console.log(req.body);
+  const webhook: IWebhookDeliveryResponse = req.body;
 
   const itemsToIndex: SearchableItem[] = [];
   for (const affectedItem of webhook.data.items) {
