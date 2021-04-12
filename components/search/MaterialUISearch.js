@@ -29,8 +29,8 @@ function MaterialUISearch(props) {
   const CustomSearchBox = connectSearchBox(MaterialUISearchBox);
 
   const algoliaClient = algoliasearch(
-    process.env.ALGOLIA_APP_ID,
-    process.env.ALGOLIA_SEARCH_API_KEY
+    props.algoliaConfig.algoliaAppId,
+    props.algoliaConfig.algoliaSearchApiKey,
   );
 
   const searchClient = {
@@ -54,7 +54,7 @@ function MaterialUISearch(props) {
   return (
 
     <InstantSearch
-      indexName={process.env.ALGOLIA_INDEX_NAME}
+      indexName={props.algoliaConfig.algoliaIndexName}
       searchClient={searchClient}
     >
       <CustomSearchBox />

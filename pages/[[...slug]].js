@@ -67,6 +67,11 @@ export async function getStaticProps({ params, preview = false }) {
             ...props,
             params,
             preview,
+            algoliaConfig: {
+                algoliaAppId: process.env.ALGOLIA_APP_ID,
+                algoliaSearchApiKey: process.env.ALGOLIA_SEARCH_API_KEY,
+                algoliaIndexName:process.env.ALGOLIA_INDEX_NAME,
+            }
         },
         // Next.js will attempt to re-generate the page:
         // https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration
