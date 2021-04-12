@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { indexSearchableStructure, processNotIndexedContent, searchIndex } from "../../lib/api";
 import { SearchableItem } from "../../next-env";
+import { IWebhookDeliveryResponse } from "@kentico/kontent-webhook-helper";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   // Only receiving POST requests
@@ -18,11 +19,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   /*if (!event.headers['x-kc-signature'] || !KontentHelper.signatureHelper.isValidSignatureFromString(event.body, KONTENT_SECRET, event.headers['x-kc-signature'])) {
     return { statusCode: 401, body: "Unauthorized" };
   }*/
+  // or use official library
+  // import { signatureHelper } from '@kentico/kontent-webhook-helper';
+  // const isValid = signatureHelper.isValidSignatureFromString(
+  //     payload,
+  //     secret,
+  //     signature);
 
-  const webhook: KontentWebhookModel = JSON.parse(req.body);
+  const webhook: IWebhookDeliveryResponse = JSON.parse(req.body);
 
   const itemsToIndex: SearchableItem[] = [];
-
   for (const affectedItem of webhook.data.items) {
     const foundItems: SearchableItem[] = await searchIndex(affectedItem.codename);
 
