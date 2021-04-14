@@ -195,7 +195,7 @@ export function getAlgoliaConfig(): AlgoliaConfiguration {
 }
 
 // extracts text content from an item + linked items
-function getContentFromItem(item: ContentItem, children: string[], allContent: ContentItem[]): ContentBlock[] {
+function getContentFromItem(item: ContentItem, parents: string[], children: string[], allContent: ContentItem[]): ContentBlock[] {
   if (!item) return [];
 
   // array of linked content for this item
@@ -210,6 +210,7 @@ function getContentFromItem(item: ContentItem, children: string[], allContent: C
     collection: item.system.collection,
     type: item.system.type,
     name: item.system.name,
+    parents: parents,
     contents: ""
   };
 
@@ -279,13 +280,20 @@ export function createSearchableStructure(contentWithSlug: ContentItem[], allCon
       type: item.system.type,
       collection: item.system.collection,
       slug: item[process.env.KONTENT_SLUG_ELEMENT_NAME].value,
+      parents: [],
       children: [],
       content: [],
       // TODO add structured information of an contentwithSlug items
     };
 
-    searchableItem.content = getContentFromItem(item, searchableItem.children, allContent);
+    searchableItem.content = getContentFromItem(item, searchableItem.parents, searchableItem.children, allContent);
     searchableStructure.push(searchableItem);
+  }
+
+  // TODO this should be handled differently for the update
+  // fill out parents for all `process.env.KONTENT_SLUG_ELEMENT_NAME` items as well
+  for (const searchableItem of searchableStructure) {
+    searchableItem.parents = searchableStructure.filter(i => i.children.includes(searchableItem.codename)).map(i => i.codename);
   }
 
   return searchableStructure;

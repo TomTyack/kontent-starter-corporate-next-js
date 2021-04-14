@@ -14,6 +14,7 @@ type SearchProjectConfiguration = {
 type SearchableItem = {
   id: string,
   objectID: string,
+  parents: string[],
   children: string[],
   codename: string,
   name: string,
@@ -31,6 +32,7 @@ type ContentBlock = {
   type: string,
   language: string,
   collection: string,
+  parents: string[],
   contents: string
 }
 
