@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { indexSearchableStructure, processNotIndexedContent, searchIndex } from "../../lib/api";
+import { indexSearchableStructure, processIndexedContent, processNotIndexedContent, searchIndex } from "../../lib/api";
 import { SearchableItem } from "../../next-env";
 import { IWebhookDeliveryResponse } from "@kentico/kontent-webhook-helper";
 
@@ -26,12 +26,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   //     secret,
   //     signature);
 
-  console.log(req.body);
   const webhook: IWebhookDeliveryResponse = req.body;
 
   const itemsToIndex: SearchableItem[] = [];
   for (const affectedItem of webhook.data.items) {
-    const foundItems: SearchableItem[] = await searchIndex(affectedItem.codename);
+    const foundItems = await searchIndex(affectedItem.codename);
 
     // item not found in algolia  => new content to be indexed?
     if (foundItems.length == 0) {
@@ -40,7 +39,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     else {
       // we actually found some items in algolia => update or delete?
       for (const foundItem of foundItems) {
-        itemsToIndex.push(...await processNotIndexedContent(foundItem.codename));
+        //TODO fix to processIndexedContent
+        itemsToIndex.push(...await processIndexedContent(foundItem.codename));
       }
     }
   }

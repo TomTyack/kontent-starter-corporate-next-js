@@ -282,14 +282,15 @@ export function createSearchableStructure(contentWithSlug: ContentItem[], allCon
       slug: item[process.env.KONTENT_SLUG_ELEMENT_NAME].value,
       parents: [],
       children: [],
-      content: []
+      content: [],
       // TODO add structured information of an contentwithSlug items
     };
 
-    searchableItem.content = getContentFromItem(item, searchableItem.parents, searchableItem.children, allContent,);
+    searchableItem.content = getContentFromItem(item, searchableItem.parents, searchableItem.children, allContent);
     searchableStructure.push(searchableItem);
   }
 
+  // TODO this should be handled differently for the update
   // fill out parents for all `process.env.KONTENT_SLUG_ELEMENT_NAME` items as well
   for (const searchableItem of searchableStructure) {
     searchableItem.parents = searchableStructure.filter(i => i.children.includes(searchableItem.codename)).map(i => i.codename);
@@ -354,7 +355,7 @@ export async function processIndexedContent(codename: string) {
   const itemFromDelivery = content.find(item => item.system.codename == codename);
 
   // nothing found in Kontent => item has been removed
-  if (itemFromDelivery) {
+  if (!itemFromDelivery) {
     console.log("item will be removed from index: " + codename);
     await removeFromIndex([codename]);
     return [];
@@ -366,7 +367,6 @@ export async function processIndexedContent(codename: string) {
 }
 
 async function removeFromIndex(codenames: string[]): Promise<string[]> {
-  // TODO tell Rosta about wait
   const response = await algoliaIndex.deleteObjects(codenames).wait();
   return response.objectIDs;
 }
