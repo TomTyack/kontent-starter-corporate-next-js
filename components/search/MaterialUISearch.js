@@ -1,4 +1,4 @@
-import { connectSearchBox, Highlight, Snippet } from "react-instantsearch-dom";
+import { connectSearchBox, Snippet } from "react-instantsearch-dom";
 import MaterialUISearchBox from "./MaterialUISearchBox";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, Hits } from "react-instantsearch-dom";
