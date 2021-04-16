@@ -1,8 +1,8 @@
-import { connectSearchBox } from "react-instantsearch-dom";
+import { connectSearchBox, Highlight, Snippet } from "react-instantsearch-dom";
 import MaterialUISearchBox from "./MaterialUISearchBox";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, Hits } from "react-instantsearch-dom";
-import { Card, makeStyles } from "@material-ui/core";
+import { Card as div, makeStyles } from "@material-ui/core";
 import { getUrlFromMapping } from "../../utils";
 import get from "lodash.get";
 
@@ -21,6 +21,20 @@ const useStyles = makeStyles((theme) => ({
       }
     }
   },
+  hit: {
+    display: "flex",
+    flexDirection: "row",
+    padding: theme.spacing(1),
+    margin: theme.spacing(1),
+    background: "grey",
+    "& em": {
+      background: "yellow"
+    },
+  },
+  highlight: {
+    border: "2px solid yellow"
+  }
+
 
 }));
 
@@ -56,15 +70,26 @@ function MaterialUISearch(props) {
     <InstantSearch
       indexName={props.algoliaConfig.algoliaIndexName}
       searchClient={searchClient}
+
     >
       <CustomSearchBox />
-      <Card className={classes.hits}>
-        <Hits hitComponent={({ hit }) => (
-          <a href={getUrlFromMapping(get(props, "data.mappings", []), hit.codename)}>
-            {hit.name}
-          </a>
-        )} />
-      </Card>
+      <div className={classes.hits}>
+        <Hits hitComponent={({ hit }) => {
+          console.log(hit);
+          return (
+            // <a href={getUrlFromMapping(get(props, "data.mappings", []), hit.codename)}>
+            //   {hit.name}
+            // </a>
+            <div className={classes.hit}>
+              <a href={getUrlFromMapping(get(props, "data.mappings", []), hit.codename)}>
+                {hit.name}
+              </a>
+              {/* TODO: identify proper indexes of the hit */}
+              <Snippet hit={hit} attribute="content[0].contents" />
+            </div>
+          );
+        }} />
+      </div>
     </InstantSearch>
   );
 }

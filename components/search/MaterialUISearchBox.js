@@ -3,7 +3,7 @@ import { InputBase } from "@material-ui/core";
 
 function MaterialUISearchBox({
   currentRefinement,
-  isSearchStalled,
+  // isSearchStalled,
   refine,
 }) {
 
@@ -15,7 +15,7 @@ function MaterialUISearchBox({
         value={currentRefinement}
         onChange={(e) => refine(e.currentTarget.value)}
       />
-      {isSearchStalled ? "My search is stalled" : ""}
+      {/* {isSearchStalled ? "My search is stalled" : ""} */}
     </>
   );
 }
