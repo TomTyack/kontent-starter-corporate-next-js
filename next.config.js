@@ -5,5 +5,8 @@ module.exports = {
     loader: "imgix",
     path: "",
   },
-  target: "serverless"
+  target: "serverless",
+  future: {
+    webpack5: true,
+  },
 };
