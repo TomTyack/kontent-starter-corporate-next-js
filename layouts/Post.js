@@ -49,7 +49,7 @@ function Post(props) {
         <Typography component="div">
           <RichText
             {...props}
-            richTextElement={get(props, "page.content", null)}
+            richTextElement={get(page, "content", null)}
           />
         </Typography>
 

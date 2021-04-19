@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SimplePage(props) {
   const classes = useStyles();
-  const page = get(props, "page.content.value[0]", null);
+  const page = get(props, "page", null);
 
   const theme = useTheme();
   const imageSizes = `${theme.breakpoints.values.md}px`;
@@ -49,7 +49,7 @@ function SimplePage(props) {
         <Typography component="div">
           <RichText
             {...props}
-            richTextElement={get(props, "page.content.value[0].content", null)}
+            richTextElement={get(page, "content", null)}
           />
         </Typography>
       </Container>

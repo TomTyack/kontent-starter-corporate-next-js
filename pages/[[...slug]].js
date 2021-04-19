@@ -23,7 +23,7 @@ function getPageLayoutComponent(contentType) {
 }
 
 function Page(props) {
-    console.log("Page [[...slug]].js getStaticProps, params has render page: ", props.params);
+    console.log(new Date(), "Page [[...slug]].js getStaticProps, params is rendering the page: ", props.params);
 
     const router = useRouter();
     // If the page is not yet generated, this will be displayed
@@ -37,7 +37,7 @@ function Page(props) {
     // every page can have different layout, pick the layout based on content type
     const contentType = get(props, "page.system.type") === "post"
         ? "post"
-        : get(props, "page.content.value[0].system.type");
+        : get(props, "page.system.type");
 
     const PageLayout = getPageLayoutComponent(contentType);
 

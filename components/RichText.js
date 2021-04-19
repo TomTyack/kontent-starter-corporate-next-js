@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block"
   },
   inlineImage: {
-    width: "theme.breakpoints.values.sm"
+    width: theme.breakpoints.values.sm
   },
 }));
 
