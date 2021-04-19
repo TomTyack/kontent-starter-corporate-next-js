@@ -12,6 +12,7 @@ module.exports = {
   },
   target: "serverless",
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    
     // config.plugins.push(new webpack.ProgressPlugin(handler));
 
     return config;
