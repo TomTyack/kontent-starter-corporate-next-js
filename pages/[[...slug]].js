@@ -70,7 +70,7 @@ export async function getStaticPaths(ctx) {
 export async function getStaticProps({ params, preview = false }) {
     console.log(new Date(), "Page [[...slug]].js getStaticProps, params: ", params);
     const props = await getPageStaticPropsForPath(params, preview);
-    console.log(new Date(), "Page [[...slug]].js getStaticProps, params has props: ", props);
+    console.log(new Date(), "Page [[...slug]].js getStaticProps, params : ", params);
 
     if (props === undefined) {
         return (
