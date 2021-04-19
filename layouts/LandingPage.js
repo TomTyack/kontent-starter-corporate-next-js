@@ -1,9 +1,17 @@
 import get from "lodash.get";
-import upperFirst from "lodash.upperfirst";
-import camelCase from "lodash.camelcase";
-import { Layout, UnknownComponent } from "../components";
-import sections from "../components/sections";
 import { Box, makeStyles } from "@material-ui/core";
+import Layout from "../components/Layout";
+import {
+  ContactSection,
+  ContentSection,
+  CtaSection,
+  FaqSection,
+  FeaturesSection,
+  HeroSection,
+  ListingSection,
+  PricingSection,
+  ReviewsSection
+} from "../components/sections";
 
 const useStyles = makeStyles((theme) => ({
   sections: {
@@ -13,6 +21,31 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
+
+function getSectionComponent(contentType) {
+  switch (contentType) {
+    case "contact_section":
+      return ContactSection;
+    case "content_section":
+      return ContentSection;
+    case "cta_section":
+      return CtaSection;
+    case "faq_section":
+      return FaqSection;
+    case "features_section":
+      return FeaturesSection;
+    case "hero_section":
+      return HeroSection;
+    case "listing_section":
+      return ListingSection;
+    case "pricing_section":
+      return PricingSection;
+    case "reviews_section":
+      return ReviewsSection;
+    default:
+      return null;
+  }
+}
 
 function LandingPage(props) {
   const classes = useStyles();
@@ -30,8 +63,8 @@ function LandingPage(props) {
     <Layout {...props}>
       <Box className={classes.sections}>
         {get(page, "sections.value", []).map((section, index) => {
-          const contentType = upperFirst(camelCase(get(section, "system.type", null)));
-          const Component = sections[contentType];
+          const contentType = get(section, "system.type", null);
+          const Component = getSectionComponent(contentType)
 
           if (process.env.NODE_ENV === "development" && !Component) {
             console.error(`Unknown section component for section content type: ${contentType}`);

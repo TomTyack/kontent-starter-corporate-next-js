@@ -1,10 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Container, Divider, Grid } from "@material-ui/core";
 import get from "lodash.get";
-import upperFirst from "lodash.upperfirst";
-import camelCase from "lodash.camelcase";
 import { RichText, UnknownComponent } from "../components";
-import sections from "./footerSections";
+import { ContentSection, Form, Menu } from "./footerSections";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +18,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+function getFooterSectionComponent(contentType) {
+  switch (contentType) {
+    case "content_section":
+      return ContentSection;
+    case "form":
+      return Form;
+    case "menu":
+      return Menu;
+    default:
+      return null;
+  }
+}
+
 function Footer(props) {
   const footerSections = get(props, "data.config.footer_sections.value", []);
   const classes = useStyles();
@@ -31,8 +42,8 @@ function Footer(props) {
           {footerSections.length > 0 && (
             <Grid container spacing={2} >
               {footerSections.map((section, index) => {
-                const contentType = upperFirst(camelCase(get(section, "system.type", null)));
-                const Component = sections[contentType];
+                const contentType = get(section, "system.type", null);
+                const Component = getFooterSectionComponent(contentType);
 
                 if (process.env.NODE_ENV === "development" && !Component) {
                   console.error(`Unknown section component for section content type: ${contentType}`);

@@ -1,7 +1,7 @@
 import React from "react";
 import get from "lodash.get";
 import { Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, makeStyles, MenuItem, Select, TextField } from "@material-ui/core";
-import UnknownComponent from "./UnknownComponent";
+import { UnknownComponent } from ".";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

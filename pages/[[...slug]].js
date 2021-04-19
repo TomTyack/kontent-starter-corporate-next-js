@@ -1,12 +1,26 @@
 import React from "react";
-import _ from "lodash";
 
-import pageLayouts from "../layouts";
 import { getSitemapMappings, getPageStaticPropsForPath } from "../lib/api";
-import UnknownComponent from "../components/UnknownComponent";
 import { useRouter } from "next/router";
 import Error from "next/error";
+import { LandingPage, SimplePage, ListingPage, Post } from "../layouts";
+import { UnknownComponent } from "../components";
+import get from "lodash.get"
 
+function getPageLayoutComponent(contentType) {
+    switch (contentType) {
+        case "landing_page":
+            return LandingPage;
+        case "simple_page":
+            return SimplePage;
+        case "listing_page":
+            return ListingPage;
+        case "post":
+            return Post;
+        default:
+            return null;
+    }
+}
 
 function Page(props) {
     const router = useRouter();
@@ -19,11 +33,11 @@ function Page(props) {
     }
 
     // every page can have different layout, pick the layout based on content type
-    const contentType = _.get(props, "page.system.type") === "post"
+    const contentType = get(props, "page.system.type") === "post"
         ? "post"
-        : _.get(props, "page.content.value[0].system.type");
+        : get(props, "page.content.value[0].system.type");
 
-    const PageLayout = pageLayouts[contentType];
+    const PageLayout = getPageLayoutComponent(contentType);
 
     if (process.env.NODE_ENV === "development" && !PageLayout) {
         console.error(`Unknown Layout component for page content type: ${contentType}`);

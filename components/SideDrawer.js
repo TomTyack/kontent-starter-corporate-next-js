@@ -1,8 +1,7 @@
 import { Drawer, IconButton, List, ListItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Menu } from "@material-ui/icons";
 import { useState } from "react";
-import { Action } from ".";
+import { Action, Icon } from ".";
 
 const useStyles = makeStyles({
   list: {
@@ -54,7 +53,7 @@ const SideDrawer = (props) => {
         aria-label="menu"
         onClick={toggleDrawer("right", true)}
       >
-        <Menu fontSize="large" />
+        <Icon iconCodename="menu" />
       </IconButton>
 
       <Drawer

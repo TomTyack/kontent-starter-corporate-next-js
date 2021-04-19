@@ -19,15 +19,3 @@ export {
   FaqSection,
   ContactSection,
 };
-
-export default {
-  HeroSection,
-  FeaturesSection,
-  ReviewsSection,
-  CtaSection,
-  ListingSection,
-  ContentSection,
-  PricingSection,
-  FaqSection,
-  ContactSection,
-};

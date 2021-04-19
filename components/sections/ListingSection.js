@@ -1,10 +1,9 @@
 import React from "react";
 import get from "lodash.get";
-import upperFirst from "lodash.upperfirst";
-import camelCase from "lodash.camelcase";
 import { Card, CardContent, Container, Grid, makeStyles, Typography } from "@material-ui/core";
-import thumbnails from "../thumbnails";
-import { RichText, UnknownComponent } from "..";
+import RichText from "../RichText";
+import Post from "../thumbnails/Post";
+import { UnknownComponent } from "..";
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -17,6 +16,15 @@ const useStyles = makeStyles((theme) => ({
     height: "100%"
   }
 }));
+
+function getListingThumbnailComponent(contentType) {
+  switch (contentType) {
+    case "post":
+      return Post;
+    default:
+      return null;
+  }
+}
 
 function ListingSection(props) {
   const section = get(props, "section", null);
@@ -43,8 +51,8 @@ function ListingSection(props) {
         {relatedItems.length > 0 && (
           <Grid container spacing={2} alignItems="stretch">
             {relatedItems.map((item, item_idx) => {
-              const contentType = upperFirst(camelCase(get(item, "system.type", null)));
-              const ThumbnailLayout = thumbnails[contentType];
+              const contentType = get(item, "system.type", null);
+              const ThumbnailLayout = getListingThumbnailComponent(contentType);
 
               if (process.env.NODE_ENV === "development" && !ThumbnailLayout) {
                 console.error(`Unknown section component for section content type: ${contentType}`);

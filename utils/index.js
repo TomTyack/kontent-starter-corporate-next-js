@@ -7,9 +7,3 @@ export {
   kontentImageLoader,
   srcIsKontentAsset
 };
-
-export default {
-  getUrlFromMapping,
-  kontentImageLoader,
-  srcIsKontentAsset
-};

@@ -7,9 +7,3 @@ export {
   Menu,
   Form,
 };
-
-export default {
-  ContentSection,
-  Menu,
-  Form,
-};

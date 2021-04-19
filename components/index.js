@@ -28,19 +28,3 @@ export {
   RichText,
   Icon
 };
-
-export default {
-  UnknownComponent,
-  Layout,
-  Header,
-  Footer,
-  Link,
-  Action,
-  CtaButtons,
-  FormField,
-  Image,
-  PreviewBar,
-  SideDrawer,
-  RichText,
-  Icon
-};

@@ -1,9 +1,7 @@
 import get from "lodash.get";
-import upperFirst from "lodash.upperfirst";
-import camelCase from "lodash.camelcase";
 import { Layout, UnknownComponent } from "../components";
 import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
-import thumbnailLayouts from "../components/thumbnails";
+import Post from "../components/thumbnails/Post";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,6 +14,15 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   }
 }));
+
+function getListingThumbnailComponent(contentType) {
+  switch (contentType) {
+    case "post":
+      return Post;
+    default:
+      return null;
+  }
+}
 
 function ListingPage(props) {
   const classes = useStyles();
@@ -36,9 +43,9 @@ function ListingPage(props) {
         {relatedItems.length > 0 &&
           <Grid container spacing={4} alignItems="stretch">
             {relatedItems.map((item, item_idx) => {
-              const contentType = upperFirst(camelCase(get(item, "system.type", null)));
+              const contentType = get(item, "system.type", null);
+              const ThumbnailLayout = getListingThumbnailComponent(contentType);
 
-              const ThumbnailLayout = thumbnailLayouts[contentType];
               if (process.env.NODE_ENV === "development" && !ThumbnailLayout) {
                 console.error(`Unknown section component for section content type: ${contentType}`);
                 return (
