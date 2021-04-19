@@ -1,8 +1,8 @@
 import React from "react";
 import get from "lodash.get";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { createMuiTheme } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+// import { ThemeProvider } from "@material-ui/core/styles";
+// import { createMuiTheme } from "@material-ui/core/styles";
+// import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Head from "next/head";
 
@@ -50,35 +50,35 @@ function MyApp({ Component, pageProps }) {
       break;
   }
 
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: colors.primary,
-      },
-      secondary: {
-        main: colors.secondary,
-      },
-      background: {
-        default: "#FFF",
-      },
-    },
-    typography: {
-      fontFamily: [
-        fontName,
-        "sans-serif"
-      ]
-    },
-  });
+  // const theme = createMuiTheme({
+  //   palette: {
+  //     primary: {
+  //       main: colors.primary,
+  //     },
+  //     secondary: {
+  //       main: colors.secondary,
+  //     },
+  //     background: {
+  //       default: "#FFF",
+  //     },
+  //   },
+  //   typography: {
+  //     fontFamily: [
+  //       fontName,
+  //       "sans-serif"
+  //     ]
+  //   },
+  // });
 
-  // https://material-ui.com/guides/server-rendering/#the-client-side
-  // https://github.com/mui-org/material-ui/tree/master/examples/nextjs
-  React.useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles);
-    }
-  }, []);
+  // // https://material-ui.com/guides/server-rendering/#the-client-side
+  // // https://github.com/mui-org/material-ui/tree/master/examples/nextjs
+  // React.useEffect(() => {
+  //   // Remove the server-side injected CSS.
+  //   const jssStyles = document.querySelector("#jss-server-side");
+  //   if (jssStyles) {
+  //     jssStyles.parentElement.removeChild(jssStyles);
+  //   }
+  // }, []);
 
   return (
     <>
@@ -127,10 +127,10 @@ function MyApp({ Component, pageProps }) {
         ]))}
 
       </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      {/* <ThemeProvider theme={theme}>
+        <CssBaseline /> */}
         <Component {...pageProps} />
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
     </>
   );
 }

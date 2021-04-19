@@ -1,7 +1,6 @@
 import React from "react";
 import _ from "lodash";
 
-import pageLayouts from "../layouts";
 import { getSitemapMappings, getPageStaticPropsForPath } from "../lib/api";
 import UnknownComponent from "../components/UnknownComponent";
 import { useRouter } from "next/router";
@@ -18,23 +17,11 @@ function Page(props) {
         );
     }
 
-    // every page can have different layout, pick the layout based on content type
-    const contentType = _.get(props, "page.system.type") === "post"
-        ? "post"
-        : _.get(props, "page.content.value[0].system.type");
-
-    const PageLayout = pageLayouts[contentType];
-
-    if (process.env.NODE_ENV === "development" && !PageLayout) {
-        console.error(`Unknown Layout component for page content type: ${contentType}`);
-        return (
-            <UnknownComponent {...props} useLayout={true}>
-                <pre>{JSON.stringify(props, undefined, 2)}</pre>
-            </UnknownComponent>
-        );
-    }
-
-    return <PageLayout {...props} />;
+    return (
+        <UnknownComponent {...props}>
+            <pre>{JSON.stringify(props, undefined, 2)}</pre>
+        </UnknownComponent>
+    );
 }
 
 export async function getStaticPaths(ctx) {
