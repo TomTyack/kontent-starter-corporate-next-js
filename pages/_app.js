@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }) {
   if (title) {
     title += " | ";
   }
+  // TODO Adjust to new content model
   title += get(pageProps, "page.seo__title.value", null) || get(pageProps, "page.label.value", null);
 
   const palette = (get(pageProps, "data.config.palette.value[0].codename", null));
