@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 
 import { getSitemapMappings, getPageStaticPropsForPath } from "../lib/api";
 import UnknownComponent from "../components/UnknownComponent";
