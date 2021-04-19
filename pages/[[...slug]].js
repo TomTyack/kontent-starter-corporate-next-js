@@ -23,6 +23,8 @@ function getPageLayoutComponent(contentType) {
 }
 
 function Page(props) {
+    console.log("Page [[...slug]].js getStaticProps, params has render page: ", props.params);
+
     const router = useRouter();
     // If the page is not yet generated, this will be displayed
     // initially until getStaticProps() finishes running
@@ -52,7 +54,7 @@ function Page(props) {
 }
 
 export async function getStaticPaths(ctx) {
-    console.log("Page [[...slug]].js getStaticPaths", ctx);
+    console.log(new Date(), "Page [[...slug]].js getStaticPaths", ctx);
     const paths = await getSitemapMappings();
 
     // https://nextjs.org/docs/messages/ssg-fallback-true-export
@@ -66,8 +68,9 @@ export async function getStaticPaths(ctx) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-    console.log("Page [[...slug]].js getStaticProps, params: ", params);
+    console.log(new Date(), "Page [[...slug]].js getStaticProps, params: ", params);
     const props = await getPageStaticPropsForPath(params, preview);
+    console.log(new Date(), "Page [[...slug]].js getStaticProps, params has props: ", params);
 
     if (props === undefined) {
         return (
