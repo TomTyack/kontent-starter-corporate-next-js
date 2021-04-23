@@ -1,9 +1,10 @@
-import { connectSearchBox, Snippet } from "react-instantsearch-dom";
+import { connectSearchBox } from "react-instantsearch-dom";
 import MaterialUISearchBox from "./MaterialUISearchBox";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, Hits } from "react-instantsearch-dom";
-import { Card as div, makeStyles } from "@material-ui/core";
+import { Card, makeStyles } from "@material-ui/core";
 import { getUrlFromMapping } from "../../utils";
+import { Link } from "..";
 import get from "lodash.get";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,16 +27,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     padding: theme.spacing(1),
     margin: theme.spacing(1),
-    background: "grey",
-    "& em": {
-      background: "yellow"
+    "& em, & ais-highlight-0000000000": {
+      background: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
     },
   },
-  highlight: {
-    border: "2px solid yellow"
-  }
-
-
 }));
 
 function MaterialUISearch(props) {
@@ -73,23 +69,32 @@ function MaterialUISearch(props) {
 
     >
       <CustomSearchBox />
-      <div className={classes.hits}>
+      <Card className={classes.hits}>
         <Hits hitComponent={({ hit }) => {
-          console.log(hit);
+          const snippets = hit._snippetResult.content
+            .filter(content => content.contents.matchLevel !== 'none')
+            .map((match, index) => (
+              <div key={index} dangerouslySetInnerHTML={{ __html: match.contents.value }} />
+            ))
+
+          const hitUrl = getUrlFromMapping(get(props, "data.mappings", []), hit.codename);
+          if (!hitUrl) {
+            return null;
+          }
+
           return (
-            // <a href={getUrlFromMapping(get(props, "data.mappings", []), hit.codename)}>
-            //   {hit.name}
-            // </a>
             <div className={classes.hit}>
-              <a href={getUrlFromMapping(get(props, "data.mappings", []), hit.codename)}>
+              <Link href={hitUrl}>
                 {hit.name}
-              </a>
-              {/* TODO: identify proper indexes of the hit */}
-              <Snippet hit={hit} attribute="content[0].contents" />
+              </Link>
+              <div>
+                {snippets}
+              </div>
             </div>
           );
+
         }} />
-      </div>
+      </Card>
     </InstantSearch>
   );
 }
