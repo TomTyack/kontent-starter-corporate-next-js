@@ -22,7 +22,8 @@ type SearchableItem = {
   type: string,
   slug: string,
   collection: string,
-  content: ContentBlock[]
+  content: ContentBlock[],
+  label: string,
 }
 
 type ContentBlock = {

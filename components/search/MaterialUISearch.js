@@ -85,7 +85,7 @@ function MaterialUISearch(props) {
           return (
             <div className={classes.hit}>
               <Link href={hitUrl}>
-                {hit.name}
+                {hit.label}
               </Link>
               <div>
                 {snippets}

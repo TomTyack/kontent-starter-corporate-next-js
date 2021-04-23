@@ -283,6 +283,11 @@ export function createSearchableStructure(contentWithSlug: ContentItem[], allCon
       parents: [],
       children: [],
       content: [],
+      label: item.label
+        ? item.label.value
+        : item.title
+          ? item.title.value
+          : item.system.name
       // TODO add structured information of an contentwithSlug items
     };
 
