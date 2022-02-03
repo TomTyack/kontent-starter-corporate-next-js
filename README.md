@@ -62,7 +62,7 @@ yarn create next-app --example https://github.com/Kentico/kontent-starter-corpor
 
 1. Create an account on Kontent
    - [Create an account on Kontent.ai](https://app.kontent.ai/sign-up?utm_source=nextjs_boilerplate_example&utm_medium=devrel).
-2. After signing up, [create an empty project](https://docs.kontent.ai/tutorials/set-up-kontent/projects/manage-projects#a-creating-projects).
+2. After signing up, [create an empty project](https://kontent.ai/learn/tutorials/manage-kontent/projects/manage-projects#a-create-projects).
 3. Go to the "Project Settings", select API keys and copy the following keys for further reference
    - Project ID
    - Management API key
@@ -76,7 +76,7 @@ yarn create next-app --example https://github.com/Kentico/kontent-starter-corpor
      kbm --action=restore --projectId=<Project ID> --apiKey=<Management API key> --zipFilename=kontent-backup
     ```
    
-5. Go to your Kontent project and [publish the imported items](https://docs.kontent.ai/tutorials/write-and-collaborate/publish-your-work/publish-content-items).
+5. Go to your Kontent project and [publish the imported items](https://kontent.ai/learn/tutorials/write-and-collaborate/publish-your-work/publish-content-items).
 
 ### Connect Kontent project with code base
 
@@ -96,7 +96,7 @@ yarn dev
 
 🎉 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying content in Kontent project. The page auto-updates as you edit the content. If you don't have `KONTENT_PREVIEW_API_KEY` specified, you need to [publish the changes](https://docs.kontent.ai/tutorials/write-and-collaborate/publish-your-work/publish-content-items) in order to see the changes on site.
+You can start editing the page by modifying content in Kontent project. The page auto-updates as you edit the content. If you don't have `KONTENT_PREVIEW_API_KEY` specified, you need to [publish the changes](https://kontent.ai/learn/tutorials/write-and-collaborate/publish-your-work/publish-content-items) in order to see the changes on site.
 
 ## About
 
@@ -108,7 +108,7 @@ Content is modeled to be ready for being used in the [Web Spotlight](webspotligh
 
 ![Content structure](./docs/content-structure.png)
 
-> The screen was taken from [Relations UI](https://docs.kontent.ai/tutorials/write-and-collaborate/structure-your-content/link-related-content-together#a-see-how-your-content-is-linked-together). For a better idea, check out the [content type relationships graph](./docs/content-types-relations.png).
+> The screen was taken from [Relations tab](https://kontent.ai/learn/tutorials/write-and-collaborate/structure-your-content/link-related-content-together#a-see-how-your-content-is-linked-together). For a better idea, check out the [content type relationships graph](./docs/content-types-relations.png).
 
 ### Structural types
 
@@ -119,7 +119,7 @@ The structure of the model is defined by linked items element called "Subpages"
 
 ### SEO
 
-SEO information is [modeled as a content type snippet called "SEO"](https://docs.kontent.ai/tutorials/develop-apps/optimize-your-app/seo-friendly-content#a-metadata-in-caas).
+SEO information is [modeled as a content type snippet called "SEO"](https://kontent.ai/learn/tutorials/develop-apps/optimize-your-app/seo-friendly-content#a-metadata-in-caas).
 
 This snippet is placed as a part of [structural types](#structural-types). Every sitemap entry (the content item based on structural types and a `post`) allows specifying SEO metadata. This metadata is used in a [custom App components (`_app`)](https://nextjs.org/docs/advanced-features/custom-app) component to be rendered on the page.
 
@@ -135,10 +135,10 @@ Content for these structural wrappers is defined by linked items element called 
 
 ### Turn on Web Spotlight
 
-When you turn on the [Web Spotlight](https://docs.kontent.ai/tutorials/set-up-kontent/set-up-your-project/web-spotlight). New content types ["Homepage" and "Page"](https://docs.kontent.ai/tutorials/set-up-kontent/set-up-your-project/web-spotlight#a-how-web-spotlight-works) will be generated. In order to accommodate the content types, it is required to:
+When you turn on the [Web Spotlight](https://kontent.ai/learn/tutorials/set-up-kontent/set-up-your-project/web-spotlight). New content types ["Homepage" and "Page"](https://kontent.ai/learn/tutorials/set-up-kontent/set-up-your-project/web-spotlight#a-how-web-spotlight-works) will be generated. In order to accommodate the content types, it is required to:
 
 - Remove the Page content type, because its responsibilities are handled by "Navigation Item" content type.
-- Transfer content model structure from "old" homepage content type to newly created one. The only difference is the "Subpages" element that will be modeled by [Subpages](https://docs.kontent.ai/tutorials/set-up-kontent/content-modeling/what-is-content-modeling#a-subpages) element type. It is important to keep the codenames of the element the same.
+- Transfer content model structure from "old" homepage content type to newly created one. The only difference is the "Subpages" element that will be modeled by [Subpages](https://kontent.ai/learn/tutorials/set-up-kontent/content-modeling/what-is-content-modeling#a-subpages) element type. It is important to keep the codenames of the element the same.
 - Transfer the data from old "homepage".
 - Remove the "old" homepage content item and the "old" content type and set the new homepage content item codename to "homepage".
 
@@ -263,7 +263,7 @@ Reference:
 
 ## Preview
 
-Next.js offers embedded possibility to preview unpublished content - [the preview mode](https://nextjs.org/docs/advanced-features/preview-mode). This feature is integrated with [Kontent preview](https://docs.kontent.ai/tutorials/develop-apps/build-strong-foundation/set-up-preview) in this starter. Once the preview is enabled, all api calls are performed to the [Kontent Preview endpoints](https://docs.kontent.ai/reference/delivery-api#section/Production-vs.-Preview).
+Next.js offers embedded possibility to preview unpublished content - [the preview mode](https://nextjs.org/docs/advanced-features/preview-mode). This feature is integrated with [Kontent preview](https://kontent.ai/learn/tutorials/develop-apps/build-strong-foundation/set-up-preview) in this starter. Once the preview is enabled, all api calls are performed to the [Kontent Preview endpoints](https://kontent.ai/learn/reference/delivery-api#section/Production-vs.-Preview).
 
 There are two Next API routes - `/api/preview` and `/api/exit-preview` - that works as described in [Next.js docs](https://nextjs.org/docs/advanced-features/preview-mode).
 
@@ -281,7 +281,7 @@ Once your secret is verified, you will be redirected to home page and you could 
 
 #### Preview URLs
 
-Kontent [offers a possibility to set the preview URLs for the content types](https://docs.kontent.ai/tutorials/develop-apps/build-strong-foundation/set-up-preview#a-set-up-content-preview-in-your-project). The starter (`/api/preview` route) is already prepared to consume this preview URLs for [structural types](#structural-types) and for the `Post` content type.
+Kontent [offers a possibility to set the preview URLs for the content types](https://kontent.ai/learn/tutorials/develop-apps/build-strong-foundation/set-up-preview#a-set-up-content-preview-in-your-project). The starter (`/api/preview` route) is already prepared to consume this preview URLs for [structural types](#structural-types) and for the `Post` content type.
 
 To allow that for your project, just set the Preview URLs for `Navigation item`, `Homepage`, and `Post` content type to (fill values in angle brackets):
 
@@ -331,7 +331,7 @@ yarn static-export
 
 ## Rich text element resolution
 
-A [Rich text element](https://docs.kontent.ai/reference/delivery-api#section/Rich-text-element) could carry more than just a text. It could contain links, images, components, and inline linked items. The starter offers a `/style-guide` section to showcase the options to resolve complex structure into the React components.
+A [Rich text element](https://kontent.ai/learn/reference/delivery-api#section/Rich-text-element) could carry more than just a text. It could contain links, images, components, and inline linked items. The starter offers a `/style-guide` section to showcase the options to resolve complex structure into the React components.
 
 The `/style-guide` is a page based on the `simple_page` layout containing title, sub, and the content in a form of a rich text element. This rich text element contains a showcase of various typographical examples (headlines, lists, tables) and also images, components, and links to other content items. To parse and resolve them, there is a pair of components. The first one is `RichTextComponent` containing the parsing logic (using [`html-react-parser`](https://www.npmjs.com/package/html-react-parser) library) and offering the possibility to implement the resolution. And the second one defining the resolution logic from rich text blocks to React Components - the `RichText` component.
 
@@ -358,7 +358,7 @@ Rich Text Component
 
 ![Rich text link resolution](docs/rich-text-links.png)
 
-> 💡 You could use a different approach to resolve the rich text element blocks. It is possible to use the [embedded support in Javascript SDK](https://docs.kontent.ai/tutorials/develop-apps/get-content/structured-rich-text?tech=javascript) that allows resolving blocks into the `string` objects and then utilize library [`react-jsx-parser`](<[react-jsx-parser](https://www.npmjs.com/package/react-jsx-parser)>) to transform this string representation to React components This approach however requires the recreation of the model classes when you need them from the JSON object form because Next.js/React does not allow passing class objects via `props` of a React Component. If you want to get more detailed information about this topic, feel free to raise the question issue.
+> 💡 You could use a different approach to resolve the rich text element blocks. It is possible to use the [embedded support in Javascript SDK](https://kontent.ai/learn/tutorials/develop-apps/get-content/structured-rich-text?tech=javascript) that allows resolving blocks into the `string` objects and then utilize library [`react-jsx-parser`](<[react-jsx-parser](https://www.npmjs.com/package/react-jsx-parser)>) to transform this string representation to React components This approach however requires the recreation of the model classes when you need them from the JSON object form because Next.js/React does not allow passing class objects via `props` of a React Component. If you want to get more detailed information about this topic, feel free to raise the question issue.
 
 ## Design
 
