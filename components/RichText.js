@@ -2,7 +2,7 @@ import { makeStyles, Typography, useTheme } from "@material-ui/core";
 import get from "lodash.get";
 import { Image, Link } from ".";
 import { getUrlFromMapping } from "../utils";
-import { RichTextElement } from '@simply007org/kontent-react-components';
+import { RichTextElement } from "@simply007org/kontent-react-components";
 
 const useStyles = makeStyles((theme) => ({
   richText: {
