@@ -12,6 +12,7 @@
   "dependencies": {
     "@kentico/kontent-delivery": "^11.2.1",
     "@material-ui/core": "^4.12.1",
+    "@simply007org/kontent-react-components": "^0.0.4",
     "clsx": "^1.1.1",
     "html-react-parser": "^1.2.7",
     "lodash.camelcase": "^4.3.0",

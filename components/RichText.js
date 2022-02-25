@@ -2,7 +2,7 @@ import { makeStyles, Typography, useTheme } from "@material-ui/core";
 import get from "lodash.get";
 import { Image, Link } from ".";
 import { getUrlFromMapping } from "../utils";
-import RichTextComponent from "./RichTextComponent";
+import { RichTextElement } from '@simply007org/kontent-react-components';
 
 const useStyles = makeStyles((theme) => ({
   richText: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function RichText(props) {
-    const richTextElement = get(props, "richTextElement", "");
+  const richTextElement = get(props, "richTextElement", "");
   const linkedItems = get(props, "data.page.linkedItems", []);
   const mappings = get(props, "mappings");
 
@@ -47,11 +47,10 @@ function RichText(props) {
   const theme = useTheme();
 
   return (
-    <RichTextComponent
+    <RichTextElement
       className={classes.richText}
       richTextElement={richTextElement}
       linkedItems={linkedItems}
-      mappings={mappings}
       resolveLinkedItem={(linkedItem, domNode, domToReact) => {
         switch (linkedItem.system.type) {
           case "quote":
@@ -84,7 +83,7 @@ function RichText(props) {
           </div>
         );
       }}
-      resolveLink={(link, mappings, domNode, domToReact) => {
+      resolveLink={(link, domNode, domToReact) => {
         const url = getUrlFromMapping(mappings, link.codename);
         if (url) {
           return (
