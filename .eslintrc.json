@@ -1,0 +1,32 @@
+{
+    "env": {
+        "es2021": true,
+        "node": true,
+        // we need document and window API available
+        "browser": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "ignorePatterns": [".next/**/*", "out/**/*"],
+    "rules": {
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"],
+        "react/prop-types": "off",  // we don't want to validate props yet
+        "react/display-name": "off",
+        "react/react-in-jsx-scope": "off",  // suppress errors for missing 'import React' in files - next.js does it implicitly
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],  // allow jsx syntax in js files (for next.js project),
+        "no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^_"}] // ignore ones with underscore
+    }
+}
